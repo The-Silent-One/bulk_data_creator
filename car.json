@@ -1,0 +1,14 @@
+{
+  "name" : "Car",
+  "name-color" : [204, 66, 130],
+  "manufacturer" : "Volkswagen",
+  "manufacturer-color" : [129, 123, 212],
+  "country" : "Germany",
+  "country-color" : [224, 242, 22],
+  "model" : "Bettle",
+  "model-color" : [242, 179, 102],
+  "nb-wheels" : 4,
+  "nb-wheels-color" : [57, 117, 25],
+  "color": "black",
+  "color-color" : [99, 78, 67]
+}
