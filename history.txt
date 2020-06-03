@@ -1,0 +1,42 @@
+def openModel(self,path):
+        with open(path,"r") as f:
+            jsonElt = json.load(f)
+            box = CollapsibleBox(path.split(".")[0])
+            self.vlay.addWidget(box)
+            lay = QVBoxLayout()
+            
+            for k in jsonElt.keys():
+                if  k.endswith("-color") :
+                    continue
+                label = QLabel("{0} : {1}".format(k,jsonElt[k]))
+                
+                try:
+                    color = QColor(*jsonElt[k+"-color"])
+                except Exception as e:
+                    print(e)
+                    color = QColor(*[random.randint(0, 255) for _ in range(3)])
+                    
+                label.setStyleSheet(
+                "background-color: {}; color : black;".format(color.name())
+                )
+                label.setAlignment(Qt.AlignCenter)
+                lay.addWidget(label)
+
+            box.setContentLayout(lay)
+        self.vlay.addStretch()
+
+        
+class DropLabel(QLabel):
+    def __init__(self, *args, **kwargs):
+        QLabel.__init__(self, *args, **kwargs)
+        self.setAcceptDrops(True)
+
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasText():
+            event.acceptProposedAction()
+
+    def dropEvent(self, event):
+        pos = event.pos()
+        text = event.mimeData().text()
+        self.setText(text)
+        event.acceptProposedAction()
